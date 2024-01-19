@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desert Survival Score Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        .calculator-box {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            max-width: 600px; /* Increased from 400px */
+            overflow: auto; /* Added to handle overflow */
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        input[type="number"] {
+            width: calc(100% - 20px); /* Adjusted width */
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            display: none;
+            margin-top: 20px;
+        }
+        #score {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Desert Survival Score Calculator</h1>
+    <div class="calculator-box">
+        <form id="calculator-form">
+            <!-- Input fields for each item -->
+            <label for="torch">Torch with 4 battery-cells:</label>
+            <input type="number" id="torch" name="torch" required>
+
+            <label for="knife">Folding knife:</label>
+            <input type="number" id="knife" name="knife" required>
+
+            <label for="map">Air map of the area:</label>
+            <input type="number" id="map" name="map" required>
+
+            <label for="raincoat">Plastic raincoat (large size):</label>
+            <input type="number" id="raincoat" name="raincoat" required>
+
+            <label for="compass">Magnetic compass:</label>
+            <input type="number" id="compass" name="compass" required>
+
+            <label for="first-aid">First-aid kit:</label>
+            <input type="number" id="first-aid" name="first-aid" required>
+
+            <label for="pistol">45 calibre pistol (loaded):</label>
+            <input type="number" id="pistol" name="pistol" required>
+
+            <label for="parachute">Parachute (red & white):</label>
+            <input type="number" id="parachute" name="parachute" required>
+
+            <label for="salt">Bottle of 1000 salt tablets:</label>
+            <input type="number" id="salt" name="salt" required>
+
+            <label for="water">2 litres of water per person:</label>
+            <input type="number" id="water" name="water" required>
+
+            <label for="book">A book entitled 'Desert Animals That Can Be Eaten':</label>
+            <input type="number" id="book" name="book" required>
+
+            <label for="sunglasses">Sunglasses (for everyone):</label>
+            <input type="number" id="sunglasses" name="sunglasses" required>
+
+            <label for="disinfectant">2 litres of disinfectant:</label>
+            <input type="number" id="disinfectant" name="disinfectant" required>
+
+            <label for="overcoat">Overcoat (for everyone):</label>
+            <input type="number" id="overcoat" name="overcoat" required>
+
+            <label for="mirror">A cosmetic mirror:</label>
+            <input type="number" id="mirror" name="mirror" required>
+
+            <button type="submit">Calculate Score</button>
+        </form>
+    </div>
+
+    <div id="result">
+        <p id="score"></p>
+    </div>
+
+    <script>
+        document.getElementById('calculator-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const itemScores = {
+                'torch': 4,
+                'knife': 6,
+                'map': 12,
+                'raincoat': 7,
+                'compass': 11,
+                'first-aid': 10,
+                'pistol': 8,
+                'parachute': 5,
+                'salt': 15,
+                'water': 3,
+                'book': 13,
+                'sunglasses': 9,
+                'disinfectant': 14,
+                'overcoat': 2,
+                'mirror': 1
+            };
+
+            let totalScore = 0;
+
+            for (const item in itemScores) {
+                const userRank = parseFloat(document.getElementById(item).value);
+                if (!isNaN(userRank)) {
+                    totalScore += Math.abs(userRank - itemScores[item]);
+                }
+            }
+
+            document.getElementById('score').textContent = `Your survival score is: ${totalScore}`;
+            document.getElementById('result').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
